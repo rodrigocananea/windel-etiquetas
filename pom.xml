@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>info.evoluti</groupId>
     <artifactId>etiquetas</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0.0</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -174,8 +174,8 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <outfile>SimpleImport.exe</outfile>
-                            <jar>target/SimpleImport.jar</jar>
+                            <outfile>Etiquetas.exe</outfile>
+                            <jar>target/Etiquetas.jar</jar>
                             <errTitle>encc</errTitle>
                             <icon>src/main/resources/icons/icons8_tags_48px.ico</icon>
                             <classPath>
