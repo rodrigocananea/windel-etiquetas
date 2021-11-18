@@ -392,6 +392,11 @@ public final class Main extends javax.swing.JFrame {
                 jcbExibirProdutosBarrasItemStateChanged(evt);
             }
         });
+        jcbExibirProdutosBarras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbExibirProdutosBarrasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -736,8 +741,8 @@ public final class Main extends javax.swing.JFrame {
             PrinterService.impressaoDireta(jp);
         } catch (Exception ex) {
             logger.error(ExceptionUtils.getStackTrace(ex));
-        } 
-        
+        }
+
     }//GEN-LAST:event_jbVisualizar1ActionPerformed
 
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
@@ -754,26 +759,32 @@ public final class Main extends javax.swing.JFrame {
     private void jcbCampoOrdemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCampoOrdemItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             EProp.setProp("etiquetas.campo.ordenar", jcbCampoOrdem.getSelectedItem().toString());
+            carregarProdutos();
         }
     }//GEN-LAST:event_jcbCampoOrdemItemStateChanged
 
     private void jcbOrdemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbOrdemItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             EProp.setProp("etiquetas.ordenar.tipo", jcbOrdem.getSelectedItem().toString());
+            carregarProdutos();
         }
     }//GEN-LAST:event_jcbOrdemItemStateChanged
 
     private void jcbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFiltroItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             EProp.setProp("etiquetas.filtro", jcbFiltro.getSelectedItem().toString());
+            carregarProdutos();
         }
     }//GEN-LAST:event_jcbFiltroItemStateChanged
 
     private void jcbExibirProdutosBarrasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbExibirProdutosBarrasItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            EProp.setProp("etiquetas.exibir.sembarras", String.valueOf(jcbExibirProdutosBarras.isSelected()));
-        }
+
     }//GEN-LAST:event_jcbExibirProdutosBarrasItemStateChanged
+
+    private void jcbExibirProdutosBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbExibirProdutosBarrasActionPerformed
+        EProp.setProp("etiquetas.exibir.sembarras", String.valueOf(jcbExibirProdutosBarras.isSelected()));
+        carregarProdutos();
+    }//GEN-LAST:event_jcbExibirProdutosBarrasActionPerformed
 
     public void gerarRelatorio(List<ModelEtqProd> lista) {
         new Thread(() -> {
