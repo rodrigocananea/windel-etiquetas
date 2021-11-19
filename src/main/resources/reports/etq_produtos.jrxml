@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etq_produtos" printOrder="Horizontal" pageWidth="605" pageHeight="900" whenNoDataType="NoDataSection" columnWidth="577" leftMargin="15" rightMargin="13" topMargin="35" bottomMargin="0" uuid="8d4f6aa8-fc97-4c66-9d6a-6c5451ee8d22">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etq_produtos" printOrder="Horizontal" pageWidth="283" pageHeight="283" whenNoDataType="BlankPage" columnWidth="255" columnSpacing="14" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" isIgnorePagination="true" uuid="8d4f6aa8-fc97-4c66-9d6a-6c5451ee8d22">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
 	<style name="Barcode" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="Calibri" fontSize="7"/>
 	<style name="Title" hTextAlign="Center" hImageAlign="Center" vTextAlign="Bottom" vImageAlign="Bottom" fontName="Calibri" fontSize="7"/>
 	<queryString language="XPath">
@@ -30,11 +32,11 @@
 	<field name="empresaNome" class="java.lang.String"/>
 	<field name="empresaTelefone" class="java.lang.String"/>
 	<detail>
-		<band height="60" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		<band height="169" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="mm"/>
 			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
-				<reportElement key="" style="Title" x="5" y="0" width="102" height="22" uuid="e78b0afc-7468-42b1-a17d-a01ddff62cd2">
+				<reportElement key="" style="Title" x="15" y="50" width="224" height="30" uuid="e78b0afc-7468-42b1-a17d-a01ddff62cd2">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -44,23 +46,23 @@
 					<property name="net.sf.jasperreports.style.vTextAlign" value="BOTTOM"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font fontName="Calibri" size="8" isBold="true"/>
+					<font fontName="Calibri" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="¤ #,##0.00">
-				<reportElement x="5" y="43" width="55" height="11" uuid="9144e554-b7fa-41d4-987d-964a2a4f83ed">
+			<textField textAdjust="ScaleFont" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="15" y="140" width="115" height="20" uuid="9144e554-b7fa-41d4-987d-964a2a4f83ed">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Calibri" size="9" isBold="true"/>
+					<font fontName="Calibri" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement style="Barcode" positionType="FixRelativeToBottom" x="5" y="22" width="102" height="21" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="c7baa140-3919-472f-9cda-73aff78063f1">
+				<reportElement style="Barcode" positionType="FixRelativeToBottom" x="15" y="80" width="224" height="55" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="c7baa140-3919-472f-9cda-73aff78063f1">
 					<property name="com.jaspersoft.studio.unit.barHeight" value="px"/>
 					<property name="com.jaspersoft.studio.unit.barWidth" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -80,15 +82,30 @@
 					<jr:codeExpression><![CDATA[$F{codBarras}]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
-			<textField>
-				<reportElement x="60" y="43" width="47" height="11" uuid="135191ba-545a-4c57-8884-d600bd8a850c">
+			<textField textAdjust="ScaleFont">
+				<reportElement x="140" y="140" width="99" height="20" uuid="135191ba-545a-4c57-8884-d600bd8a850c">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right">
-					<font fontName="Calibri" size="9" isBold="true"/>
+					<font fontName="Calibri" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement key="" style="Title" x="15" y="10" width="224" height="40" uuid="f36f0bd5-b256-4360-b99b-db5a5f686d54">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="net.sf.jasperreports.style.hTextAlign" value="CENTER"/>
+					<property name="net.sf.jasperreports.style.hImageAlign" value="CENTER"/>
+					<property name="net.sf.jasperreports.style.vImageAlign" value="BOTTOM"/>
+					<property name="net.sf.jasperreports.style.vTextAlign" value="BOTTOM"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresaNome} + "\n" + $F{empresaTelefone}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
