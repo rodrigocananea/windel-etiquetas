@@ -746,7 +746,9 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVisualizar1ActionPerformed
 
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        if (evt.getClickCount() == 2 && evt.getButton() == MouseEvent.BUTTON1) {
+        int column = jTable2.getSelectedColumn();
+        if ((evt.getClickCount() == 2 && evt.getButton() == MouseEvent.BUTTON1)
+                && column == 0) {
             jbRemover.doClick();
         }
     }//GEN-LAST:event_jTable2MousePressed
@@ -830,10 +832,8 @@ public final class Main extends javax.swing.JFrame {
             StringBuilder query = new StringBuilder();
             query.append("select IDPRODUTO, BARRAS, DESCRICAO, VLR_VENDA from PRODUTOS ");
             query.append("where FORADELINHA = 'N' and SERVICO = 'N' ");
+            query.append("and IDEMPRESA = '").append(EProp.prop().getInt("etiquetas.empresa", 1)).append("' ");
 
-            ModelEmpresa empresa = (ModelEmpresa) jcbEmpresa.getSelectedItem();
-            query.append("and IDEMPRESA = '").append(empresa.getId()).append("' ");
-            
             if (!jcbExibirProdutosBarras.isSelected()) {
                 query.append("and BARRAS <> '' ");
             }
