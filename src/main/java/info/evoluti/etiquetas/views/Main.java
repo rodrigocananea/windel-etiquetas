@@ -16,6 +16,7 @@ import info.evoluti.etiquetas.utils.EConst;
 import info.evoluti.etiquetas.utils.PrinterService;
 import info.evoluti.etiquetas.utils.Util;
 import info.evoluti.etiquetas.utils.components.TableSelectAllOnEditing;
+import info.evoluti.etiquetas.utils.jaspersoft.FileTypeFilter;
 import info.evoluti.etiquetas.utils.jaspersoft.MyJRViewer;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -23,6 +24,7 @@ import java.awt.Window;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.awt.print.PrinterJob;
+import java.io.File;
 import java.net.URI;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,9 +32,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -74,7 +78,8 @@ public final class Main extends javax.swing.JFrame {
         jcbOrdem.setSelectedItem(EProp.prop().getString("etiquetas.ordenar.tipo", "ASC"));
         jcbFiltro.setSelectedItem(EProp.prop().getString("etiquetas.filtro", "Descrição"));
         jcbExibirProdutosBarras.setSelected(EProp.prop().getBoolean("etiquetas.exibir.sembarras", false));
-
+        jtfArquivoJasper.setText(EProp.prop().getString("etiquetas.arquivo.jasper", ""));
+        
         impressoras();
         getEmpresas(EProp.prop().getInt("etiquetas.empresa", 1));
         carregarProdutos();
@@ -130,6 +135,9 @@ public final class Main extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jcbImpressoras = new javax.swing.JComboBox<>();
         jbSalvarOpc = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jtfArquivoJasper = new javax.swing.JTextField();
+        jbBuscarArquivoJasper = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -477,18 +485,33 @@ public final class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel6.setText("Arquivo para impressão (.jasper):");
+
+        jbBuscarArquivoJasper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_search_20px.png"))); // NOI18N
+        jbBuscarArquivoJasper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarArquivoJasperActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jtfArquivoJasper, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbBuscarArquivoJasper, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(jbSalvarOpc)
                     .addComponent(jcbImpressoras, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addContainerGap(675, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -502,9 +525,15 @@ public final class Main extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbImpressoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfArquivoJasper, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarArquivoJasper, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jbSalvarOpc)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Opções", jPanel6);
@@ -756,6 +785,7 @@ public final class Main extends javax.swing.JFrame {
     private void jbSalvarOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarOpcActionPerformed
         EProp.setProp("etiquetas.empresa", String.valueOf(((ModelEmpresa) jcbEmpresa.getSelectedItem()).getId()));
         EProp.setProp("etiquetas.impressora", jcbImpressoras.getSelectedItem().toString());
+        EProp.setProp("etiquetas.arquivo.jasper", jtfArquivoJasper.getText());
     }//GEN-LAST:event_jbSalvarOpcActionPerformed
 
     private void jcbCampoOrdemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCampoOrdemItemStateChanged
@@ -787,6 +817,21 @@ public final class Main extends javax.swing.JFrame {
         EProp.setProp("etiquetas.exibir.sembarras", String.valueOf(jcbExibirProdutosBarras.isSelected()));
         carregarProdutos();
     }//GEN-LAST:event_jcbExibirProdutosBarrasActionPerformed
+
+    private void jbBuscarArquivoJasperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarArquivoJasperActionPerformed
+        JFileChooser fileChooser = new JFileChooser(".");
+        FileFilter jasperFilter = new FileTypeFilter(".jasper", "Arquivo Jasper Studio");
+        fileChooser.addChoosableFileFilter(jasperFilter);
+        fileChooser.setFileFilter(jasperFilter);
+        int status = fileChooser.showOpenDialog(null);
+        if (status == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            jtfArquivoJasper.setText(selectedFile.getPath());
+            logger.info("Selecionado arquivo:");
+            logger.info(selectedFile.getPath());
+            logger.info("");
+        }
+    }//GEN-LAST:event_jbBuscarArquivoJasperActionPerformed
 
     public void gerarRelatorio(List<ModelEtqProd> lista) {
         new Thread(() -> {
@@ -960,6 +1005,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -978,6 +1024,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JButton jbAdicionar;
     private javax.swing.JButton jbAdicionar_Todos;
+    private javax.swing.JButton jbBuscarArquivoJasper;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbRemover_Todos;
@@ -993,6 +1040,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiExit;
     private javax.swing.JRadioButtonMenuItem jrbmDark;
     private javax.swing.JRadioButtonMenuItem jrbmLight;
+    private javax.swing.JTextField jtfArquivoJasper;
     private javax.swing.JTextField jtfPesquisar;
     // End of variables declaration//GEN-END:variables
 

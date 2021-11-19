@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etq_produtos" printOrder="Horizontal" pageWidth="226" pageHeight="170" whenNoDataType="BlankPage" columnWidth="226" columnSpacing="14" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="8d4f6aa8-fc97-4c66-9d6a-6c5451ee8d22">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etq_produtos" printOrder="Horizontal" pageWidth="283" pageHeight="170" whenNoDataType="NoPages" columnWidth="283" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="8d4f6aa8-fc97-4c66-9d6a-6c5451ee8d22">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -37,7 +37,7 @@
 			<property name="com.jaspersoft.studio.layout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="mm"/>
 			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
-				<reportElement key="" style="Title" x="10" y="47" width="198" height="30" uuid="e78b0afc-7468-42b1-a17d-a01ddff62cd2">
+				<reportElement key="" style="Title" x="16" y="45" width="198" height="30" uuid="e78b0afc-7468-42b1-a17d-a01ddff62cd2">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -52,7 +52,7 @@
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="10" y="125" width="99" height="20" uuid="9144e554-b7fa-41d4-987d-964a2a4f83ed">
+				<reportElement x="16" y="123" width="99" height="20" uuid="9144e554-b7fa-41d4-987d-964a2a4f83ed">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -63,7 +63,7 @@
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement style="Barcode" positionType="FixRelativeToBottom" x="10" y="80" width="198" height="42" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="c7baa140-3919-472f-9cda-73aff78063f1">
+				<reportElement style="Barcode" positionType="FixRelativeToBottom" x="16" y="78" width="198" height="42" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="c7baa140-3919-472f-9cda-73aff78063f1">
 					<property name="com.jaspersoft.studio.unit.barHeight" value="px"/>
 					<property name="com.jaspersoft.studio.unit.barWidth" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -84,7 +84,7 @@
 				</jr:barbecue>
 			</componentElement>
 			<textField textAdjust="ScaleFont">
-				<reportElement x="109" y="125" width="99" height="20" uuid="135191ba-545a-4c57-8884-d600bd8a850c">
+				<reportElement x="115" y="123" width="99" height="20" uuid="135191ba-545a-4c57-8884-d600bd8a850c">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -94,7 +94,7 @@
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
-				<reportElement key="" style="Title" x="10" y="7" width="198" height="40" uuid="f36f0bd5-b256-4360-b99b-db5a5f686d54">
+				<reportElement key="" style="Title" x="16" y="5" width="198" height="40" uuid="f36f0bd5-b256-4360-b99b-db5a5f686d54">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>

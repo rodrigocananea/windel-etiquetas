@@ -5,7 +5,9 @@
  */
 package info.evoluti.etiquetas.utils;
 
+import static info.evoluti.etiquetas.Etiquetas.EProp;
 import info.evoluti.etiquetas.models.ModelEtqProd;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -29,6 +31,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -36,16 +39,26 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Util {
 
+    final static Logger logger = Logger.getLogger("utils/SIProp");
+    
     public static JasperReport loadReport(final String fileName) throws IOException, JRException {
         try (InputStream in = Util.class.getClass().getResourceAsStream("/reports/" + fileName)) {
             return (JasperReport) JRLoader.loadObject(in);
         }
     }
-    
+
     public static JasperPrint getJasperPrintEtq(List<ModelEtqProd> lista) throws IOException, JRException {
-        return JasperFillManager.fillReport(loadReport("etq_produtos.jasper"), null, new JRBeanCollectionDataSource(lista));
+        String reportLocal = EProp.prop().getString("etiquetas.arquivo.jasper", "");
+        if (StringUtils.isBlank(reportLocal)
+                || !(new File(reportLocal)).exists()) {
+            logger.info("Utilizando arquivo jasper interno.");
+            return JasperFillManager.fillReport(loadReport("etq_produtos.jasper"), null, new JRBeanCollectionDataSource(lista));
+        } else {
+            logger.info("Utilizando arquivo jasper local: " + reportLocal);
+            return JasperFillManager.fillReport(reportLocal, null, new JRBeanCollectionDataSource(lista));
+        }
     }
-    
+
     public static String currency(double value) {
         return NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(value);
     }
@@ -118,7 +131,6 @@ public class Util {
         return NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(value);
     }
 
-    
     public static boolean indexExists(final List list, final int index) {
         return index >= 0 && index < list.size();
     }
