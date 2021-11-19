@@ -831,6 +831,9 @@ public final class Main extends javax.swing.JFrame {
             query.append("select IDPRODUTO, BARRAS, DESCRICAO, VLR_VENDA from PRODUTOS ");
             query.append("where FORADELINHA = 'N' and SERVICO = 'N' ");
 
+            ModelEmpresa empresa = (ModelEmpresa) jcbEmpresa.getSelectedItem();
+            query.append("and IDEMPRESA = '").append(empresa.getId()).append("' ");
+            
             if (!jcbExibirProdutosBarras.isSelected()) {
                 query.append("and BARRAS <> '' ");
             }
