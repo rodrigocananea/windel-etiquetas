@@ -613,7 +613,7 @@ public final class Main extends javax.swing.JFrame {
                 Double valor = Double.parseDouble(String.valueOf(jTable2.getValueAt(i, 3)));
                 int quantidade = Integer.parseInt(String.valueOf(jTable2.getValueAt(i, 4)));
                 for (int z = 1; z <= quantidade; z++) {
-                    ModelEtqProd prod = new ModelEtqProd(id, barras, nome, valor, empresa.getNome(), empresa.getTelefone());
+                    ModelEtqProd prod = new ModelEtqProd(id, barras, nome, valor, empresa.getFantasia(), empresa.getTelefone());
                     listaProd_rel.add(prod);
                 }
             }

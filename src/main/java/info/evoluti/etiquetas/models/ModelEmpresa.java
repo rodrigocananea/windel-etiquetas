@@ -13,6 +13,7 @@ public class ModelEmpresa {
 
     int id;
     String nome;
+    String fantasia;
     String telefone;
 
     public ModelEmpresa() {
@@ -26,6 +27,14 @@ public class ModelEmpresa {
         this.id = id;
     }
 
+    public String getFantasia() {
+        return fantasia;
+    }
+
+    public void setFantasia(String fantasia) {
+        this.fantasia = fantasia;
+    }
+    
     public String getNome() {
         return nome;
     }

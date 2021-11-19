@@ -27,12 +27,13 @@ public class ControllerData {
         List<ModelEmpresa> empresas = new ArrayList<>();
 
         try (Connection conn = new Database().getConnection();
-                PreparedStatement pst = conn.prepareStatement("SELECT IDEMPRESA, NOME, FONE FROM EMPRESAS")) {
+                PreparedStatement pst = conn.prepareStatement("SELECT IDEMPRESA, NOME, FANTASIA, FONE FROM EMPRESAS")) {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs != null && rs.next()) {
                     ModelEmpresa empresa = new ModelEmpresa();
                     empresa.setId(rs.getInt("IDEMPRESA"));
                     empresa.setNome(rs.getString("NOME"));
+                    empresa.setFantasia(rs.getString("FANTASIA"));
                     empresa.setTelefone(rs.getString("FONE"));
                     empresas.add(empresa);
                 }
